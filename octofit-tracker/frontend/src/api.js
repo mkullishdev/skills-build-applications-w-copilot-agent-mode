@@ -1,11 +1,15 @@
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
 
-export const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api';
+export const apiOrigin = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
-export function getEndpointUrl(collectionName) {
-  return `${apiBaseUrl}/${collectionName}/`;
+export const apiBaseUrl = `${apiOrigin}/api`;
+
+export function getEndpointUrl(endpointPath) {
+  return endpointPath.startsWith('/api/')
+    ? `${apiOrigin}${endpointPath}`
+    : `${apiBaseUrl}/${endpointPath}/`;
 }
 
 export function extractItems(responseBody, collectionName) {
@@ -26,8 +30,8 @@ export function extractItems(responseBody, collectionName) {
   return candidates.find(Array.isArray) || [];
 }
 
-export async function fetchCollection(collectionName) {
-  const response = await fetch(getEndpointUrl(collectionName));
+export async function fetchCollection(endpointPath, collectionName) {
+  const response = await fetch(getEndpointUrl(endpointPath));
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);

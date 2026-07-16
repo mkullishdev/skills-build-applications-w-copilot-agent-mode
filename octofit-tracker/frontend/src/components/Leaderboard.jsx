@@ -2,7 +2,7 @@ import { ResourceState } from './ResourceState.jsx';
 import { useCollection } from './useCollection.js';
 
 function Leaderboard() {
-  const { items: leaderboard, isLoading, error } = useCollection('leaderboard');
+  const { items: leaderboard, isLoading, error } = useCollection('/api/leaderboard/', 'leaderboard');
 
   return (
     <section className="content-panel">

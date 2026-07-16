@@ -2,7 +2,7 @@ import { ResourceState } from './ResourceState.jsx';
 import { useCollection } from './useCollection.js';
 
 function Users() {
-  const { items: users, isLoading, error } = useCollection('users');
+  const { items: users, isLoading, error } = useCollection('/api/users/', 'users');
 
   return (
     <section className="content-panel">

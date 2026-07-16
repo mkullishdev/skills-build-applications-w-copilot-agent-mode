@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchCollection } from '../api.js';
 
-export function useCollection(collectionName) {
+export function useCollection(endpointPath, collectionName) {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ export function useCollection(collectionName) {
       try {
         setIsLoading(true);
         setError(null);
-        const loadedItems = await fetchCollection(collectionName);
+        const loadedItems = await fetchCollection(endpointPath, collectionName);
 
         if (isActive) {
           setItems(loadedItems);
@@ -34,7 +34,7 @@ export function useCollection(collectionName) {
     return () => {
       isActive = false;
     };
-  }, [collectionName]);
+  }, [collectionName, endpointPath]);
 
   return { items, isLoading, error };
 }
