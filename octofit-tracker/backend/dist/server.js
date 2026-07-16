@@ -1,8 +1,10 @@
 import express from 'express';
+import cors from 'cors';
 import db from './config/database.js';
 import apiRoutes from './routes/api.js';
 const app = express();
 const port = Number(process.env.PORT) || 8000;
+app.use(cors());
 app.use(express.json());
 const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
