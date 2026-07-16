@@ -1,0 +1,10 @@
+{
+  "name": "octofit-tracker-monorepo-runner",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix octofit-tracker/backend\" \"npm run dev --prefix octofit-tracker/frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
