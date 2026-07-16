@@ -1,8 +1,12 @@
 import { ResourceState } from './ResourceState.jsx';
 import { useCollection } from './useCollection.js';
 
+const activitiesEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : '/api/activities/';
+
 function Activities() {
-  const { items: activities, isLoading, error } = useCollection('/api/activities/', 'activities');
+  const { items: activities, isLoading, error } = useCollection(activitiesEndpoint, 'activities');
 
   return (
     <section className="content-panel">

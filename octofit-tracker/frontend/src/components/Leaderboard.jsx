@@ -1,8 +1,12 @@
 import { ResourceState } from './ResourceState.jsx';
 import { useCollection } from './useCollection.js';
 
+const leaderboardEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : '/api/leaderboard/';
+
 function Leaderboard() {
-  const { items: leaderboard, isLoading, error } = useCollection('/api/leaderboard/', 'leaderboard');
+  const { items: leaderboard, isLoading, error } = useCollection(leaderboardEndpoint, 'leaderboard');
 
   return (
     <section className="content-panel">

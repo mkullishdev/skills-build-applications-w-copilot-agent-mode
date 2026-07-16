@@ -17,6 +17,10 @@ export const apiOrigin = getApiOrigin();
 export const apiBaseUrl = `${apiOrigin}/api`;
 
 export function getEndpointUrl(endpointPath) {
+  if (endpointPath.startsWith('http')) {
+    return endpointPath;
+  }
+
   return endpointPath.startsWith('/api/')
     ? `${apiOrigin}${endpointPath}`
     : `${apiBaseUrl}/${endpointPath}/`;

@@ -1,8 +1,12 @@
 import { ResourceState } from './ResourceState.jsx';
 import { useCollection } from './useCollection.js';
 
+const teamsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : '/api/teams/';
+
 function Teams() {
-  const { items: teams, isLoading, error } = useCollection('/api/teams/', 'teams');
+  const { items: teams, isLoading, error } = useCollection(teamsEndpoint, 'teams');
 
   return (
     <section className="content-panel">
